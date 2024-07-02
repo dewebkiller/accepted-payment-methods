@@ -61,6 +61,7 @@
 }
 .apm-admin-page .tab-content {
   max-width: 650px;
+  margin-top: 1px;
 }
 .nav-tab-wrapper {
   margin-bottom: 20px;
@@ -75,11 +76,14 @@
   background: var(--colorbrand);
   color: var(--colorwhite);
   transition: all 0.3s ease;
+  border-bottom: 0 !important;
 }
 .nav-tab-wrapper a.nav-tab-active {
 background: var(--colorwhite);
 color: var(--colorbrand);
-border-bottom: 1px solid var(--colorwhite);
+margin-bottom: 0 !important;
+border-bottom: 0 !important;
+/* border-bottom: 1px solid var(--colorwhite); */
 }
 #payment-methods-list {
   list-style: none;
