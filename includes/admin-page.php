@@ -1,18 +1,20 @@
 <?php
 
-function apm_add_admin_menu() {
-    add_menu_page( 
-        'Accepted Payment Methods', 
-        'Accepted Payment Methods', 
-        'manage_options', 
-        'accepted-payment-methods', 
-        'apm_admin_page', 
-        'dashicons-admin-generic' 
+function apm_add_admin_menu()
+{
+    add_menu_page(
+        'Accepted Payment Methods',
+        'Accepted Payment Methods',
+        'manage_options',
+        'accepted-payment-methods',
+        'apm_admin_page',
+        'dashicons-admin-generic'
     );
 }
-add_action( 'admin_menu', 'apm_add_admin_menu' );
+add_action('admin_menu', 'apm_add_admin_menu');
 
-function apm_admin_page() {
+function apm_admin_page()
+{
     $default_methods = array(
         'paypal' => APM_PLUGIN_URL . 'assets/icons/paypal.svg',
         'mastercard' => APM_PLUGIN_URL . 'assets/icons/mastercard.svg',
@@ -27,7 +29,23 @@ function apm_admin_page() {
     $default_settings = array('alignment' => 'left', 'size' => 'medium', 'tooltip' => 'yes');
     $settings = get_option('apm_settings', $default_settings);
     $settings = wp_parse_args($settings, $default_settings);
-    ?>
+?>
+    <div class="dwk-header-wrap wrap">
+        <div class="row">
+            <div class="logo-wrap col-md-6">
+                <div class="title">
+                    <p>
+                        <a href="https://www.dewebkiller.com/" target="_blank"><img src="https://www.dewebkiller.com/dwk/images/logo.png" alt="dewebkiller" class="dwk-logo" width="300"></a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="btn-wrap col-md-6">
+                <a href="https://buymeacoffee.com/dewebkiller/" target="_blank" class="dwk-btn dashicons-before dashicons-heart"> Support</a>
+                <a href="#" class="dwk-btn btn2 dashicons-before dashicons-star-filled"> Rate us</a>
+            </div>
+        </div>
+    </div>
     <div class="wrap apm-admin-page">
         <h1>Accepted Payment Methods</h1>
         <h2 class="nav-tab-wrapper">
@@ -35,9 +53,9 @@ function apm_admin_page() {
             <a href="#tab-2" class="nav-tab">Settings</a>
         </h2>
         <div id="tab-1" class="tab-content">
-            <h3>Accepted Payment Methods</h3>
+            <h4>Add the payment methods for you store. For the best results upload svg images</h4>
             <ul id="payment-methods-list">
-                <?php foreach ($methods as $method => $icon_url): ?>
+                <?php foreach ($methods as $method => $icon_url) : ?>
                     <li class="payment-method-item" data-method="<?php echo esc_attr($method); ?>">
                         <img src="<?php echo esc_url($icon_url); ?>" alt="<?php echo esc_attr(ucfirst($method)); ?>">
                         <span><?php echo ucfirst(str_replace('-', ' ', $method)); ?></span>
@@ -48,9 +66,9 @@ function apm_admin_page() {
             <form id="add-payment-method-form">
                 <label for="new-payment-method">New Payment Method:</label>
                 <input type="text" id="new-payment-method" name="new-payment-method" required>
-                <button id="upload-icon-button">Upload Icon</button>
+                <button id="upload-icon-button" class="button">Upload Icon</button>
                 <input type="hidden" id="upload-icon" name="upload-icon" required>
-                <button type="submit" id="add-payment-method-btn">Add Payment Method</button>
+                <button type="submit" id="add-payment-method-btn" class="button">Add Payment Method</button>
             </form>
             <button id="save-payment-methods" class="button">Save</button>
             <p id="apm-save-message" class="hidden"></p>
@@ -94,5 +112,29 @@ function apm_admin_page() {
             </form>
         </div>
     </div>
-    <?php
+    <div class="dwk-footer-wrap wrap">
+        <div class="row">
+            <div class="creator col-md-3">
+                <span>Proudly Created by</span>
+                <a href="https://www.dewebkiller.com/"><img src="https://www.dewebkiller.com/dwk/images/logo.png" alt="dewebkiller" class="dwk-logo" width="150"></a>
+            </div>
+
+            <div class="col-md-6">
+                <ul class="footer-nav">
+                    <li><a href="https://niresh.com.np/" target="_blank">Website</a></li>
+                    <li><a href="https://www.linkedin.com/in/dewebkiller/" target="_blank">Linkedin</a></li>
+                    <li><a href="https://github.com/dewebkiller" target="_blank">Github</a></li>
+                    <li><a href="https://buymeacoffee.com/dewebkiller" target="_blank">Support</a></li>
+                    <li><a href="https://www.dewebkiller.com/" target="_blank">Blog</a></li>
+                    <li><a href="#" target="_blank">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="copyright col-md-3">
+                <span>All rights reserved</span>
+                &copy; <?php echo date('Y');?>
+            </div>
+        </div>
+    </div>
+<?php
 }

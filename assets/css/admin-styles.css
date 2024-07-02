@@ -1,10 +1,86 @@
+:root {
+  --colorwhite: #fff;
+  --colorbrand: #8066AC;
+  --colorblack: #000;
+  --coloroffblack: #393738;
+}
+.dwk-header-wrap, .dwk-footer-wrap {
+  background: #ffffff;
+  border-color: var(--colorbrand);
+ 
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  overflow: hidden;
+  padding: 20px 15px;
+  position: relative;
+  -webkit-box-shadow: 8px 8px 8px 0 rgba(187, 187, 187, 0.2);
+  -moz-box-shadow: 8px 8px 8px 0 rgba(187, 187, 187, 0.2);
+  box-shadow: 8px 8px 8px 0 rgba(187, 187, 187, 0.2);
+}
+.dwk-header-wrap {
+  border-top-style: solid;
+  border-top-width: 5px;
+}
+.dwk-btn, .dwk-btn:visited {
+  border: none;
+  border-radius: 4px;
+  box-shadow: none;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: inherit;
+  font-weight: 500;
+  height: auto;
+  outline: none;
+  padding: 10px 25px;
+  text-shadow: none;
+  text-transform: uppercase;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: var(--colorbrand);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.dwk-btn:hover {
+  background: var(--coloroffblack);
+  color: var(--colorwhite);
+}
 .apm-admin-page {
-  
+  background: var(--colorwhite);
+    border-radius: 8px;
+    padding: 20px;
+}
+.dwk-header-wrap > .row {
+  display: flex;
+  align-items: center;
+}
+.btn-wrap {
+  text-align: right;
+}
+.apm-admin-page .tab-content {
+  max-width: 650px;
 }
 .nav-tab-wrapper {
   margin-bottom: 20px;
 }
-
+.nav-tab-wrapper a:focus {
+  outline: none;
+  box-shadow: none;
+}
+.nav-tab-wrapper a {
+  border-radius: 4px 4px 0 0;
+  padding: 10px 20px;
+  background: var(--colorbrand);
+  color: var(--colorwhite);
+  transition: all 0.3s ease;
+}
+.nav-tab-wrapper a.nav-tab-active {
+background: var(--colorwhite);
+color: var(--colorbrand);
+border-bottom: 1px solid var(--colorwhite);
+}
 #payment-methods-list {
   list-style: none;
   padding: 0;
@@ -67,4 +143,26 @@
   background: #f8d7da;
   color: #721c24;
   border: 1px solid #f5c6cb;
+}
+  
+.dwk-footer-wrap {
+  border-bottom-style: solid;
+  border-bottom-width: 5px;
+}
+.dwk-footer-wrap .creator span, .dwk-footer-wrap .copyright span {
+  display: block;
+  margin-bottom: 10px;
+}
+.footer-nav li {
+  display: inline-block;
+  margin-left: 10px;
+  padding-left: 10px;
+  position: relative;
+}
+.footer-nav li  a {
+  color: var(--colorbrand);
+  text-decoration: none;
+}
+.dwk-footer-wrap .copyright {
+  text-align: right;
 }
