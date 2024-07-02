@@ -33,53 +33,49 @@ jQuery(document).ready(function($) {
     });
 
     // Handle form submission for adding new payment method
-    jQuery(document).ready(function($) {
-        // Handle form submission for adding new payment method
-        $("#add-payment-method-form").submit(function(e) {
-            e.preventDefault();
-            var method = $("#new-payment-method").val();
-            var icon = $("#upload-icon").val(); // Get the icon URL from the hidden input field
-            var nonce = apmData.nonce; // Retrieve nonce from apmData
-    
-            if (!method || !icon) {
-                alert("Please enter payment method and upload an icon.");
-                return;
-            }
-    
-            $.ajax({
-                url: apmData.ajax_url,
-                type: "POST",
-                data: {
-                    action: "add_payment_method",
-                    method: method,
-                    icon: icon,
-                    nonce: nonce // Include nonce in the AJAX request
-                },
-                success: function(response) {
-                  //  console.log('response',response);
-                    // if (response.success) {
-                        $("#payment-methods-list").append(
-                            `<li class="payment-method-item" data-method="${method}">
-                                <img src="${icon}" alt="${method}">
-                                <span>${method.charAt(0).toUpperCase() + method.slice(1).replace('-', ' ')}</span>
-                                <button class="remove-method">Remove</button>
-                            </li>`
-                        );
-                        $("#new-payment-method").val("");
-                        $("#upload-icon").val("");
-                    // } else {
-                    //     alert("Error adding payment method.");
-                    // }
-                },
-                error: function(xhr, status, error) {
-                    console.log('status',status);
-                    console.log('error',error);
-                    console.log('xhr',xhr);
+    $("#add-payment-method-form").submit(function(e) {
+        e.preventDefault();
+        var method = $("#new-payment-method").val();
+        var icon = $("#upload-icon").val(); // Get the icon URL from the hidden input field
+        var nonce = apmData.nonce; // Retrieve nonce from apmData
+
+        if (!method || !icon) {
+            alert("Please enter payment method and upload an icon.");
+            return;
+        }
+
+        $.ajax({
+            url: apmData.ajax_url,
+            type: "POST",
+            data: {
+                action: "add_payment_method",
+                method: method,
+                icon: icon,
+                nonce: nonce // Include nonce in the AJAX request
+            },
+            success: function(response) {
+                if (response.success) {
+                    $("#payment-methods-list").append(
+                        `<li class="payment-method-item" data-method="${method}">
+                            <img src="${icon}" alt="${method}">
+                            <span>${method.charAt(0).toUpperCase() + method.slice(1).replace('-', ' ')}</span>
+                            <button class="remove-method">Remove</button>
+                        </li>`
+                    );
+                    $("#new-payment-method").val("");
+                    $("#upload-icon").val("");
+                } else {
+                    alert("Error adding payment method.");
                 }
-            });
+            },
+            error: function(xhr, status, error) {
+                console.log('status', status);
+                console.log('error', error);
+                console.log('xhr', xhr);
+            }
         });
     });
-    
+
     // Handle removal of payment method
     $(document).on("click", ".remove-method", function() {
         $(this).closest(".payment-method-item").remove();

@@ -21,7 +21,6 @@ require_once APM_PLUGIN_DIR . 'includes/admin-page.php';
 
 // Enqueue admin scripts and styles
 function apm_enqueue_admin_assets() {
- 
     wp_enqueue_style( 'apm-admin-styles', APM_PLUGIN_URL . 'assets/css/admin-styles.css' );
     wp_enqueue_script( 'apm-admin-scripts', APM_PLUGIN_URL . 'assets/js/admin-script.js', array('jquery', 'jquery-ui-sortable'), null, true );
     wp_localize_script( 'apm-admin-scripts', 'apmData', array(
@@ -33,9 +32,9 @@ function apm_enqueue_admin_assets() {
     if ( is_admin() ) {
         wp_enqueue_media();
     }
-           
 }
 add_action( 'admin_enqueue_scripts', 'apm_enqueue_admin_assets' );
+
 // Enqueue frontend scripts and styles
 function apm_enqueue_frontend_assets() {
     wp_enqueue_style( 'apm-frontend-styles', APM_PLUGIN_URL . 'assets/css/frontend-styles.css' );
@@ -74,17 +73,37 @@ function handle_add_payment_method() {
     if (empty($method) || empty($icon)) {
         wp_send_json_error('Please enter payment method and upload an icon.');
         return;
-    }   
-    $payment_methods=array();    // Process the data (e.g., save to database)
-    // Example: Update the option with the new payment method
-    // $payment_methods = get_option('payment_methods') ?? [];
-    var_dump($method);
+    }
+
+    // Retrieve existing payment methods
+    $payment_methods = get_option('payment_methods', array());
+
+    // Add new payment method
     $payment_methods[$method] = $icon;
     update_option('payment_methods', $payment_methods);
 
-    // wp_send_json_success();
-    die();
+    wp_send_json_success();
 }
 
 add_action('wp_ajax_add_payment_method', 'handle_add_payment_method');
-add_action('wp_ajax_nopriv_add_payment_method', 'handle_add_payment_method');
+
+// Support SVG
+function add_file_types_to_uploads($file_types) {
+    $new_filetypes = array();
+    $new_filetypes['svg'] = 'image/svg+xml';
+    $file_types = array_merge($file_types, $new_filetypes);
+    return $file_types;
+}
+add_filter('upload_mimes', 'add_file_types_to_uploads');
+
+function apm_handle_form_submission() {
+    if (isset($_POST['new-payment-method']) && isset($_POST['upload-icon'])) {
+        $method = sanitize_text_field($_POST['new-payment-method']);
+        $icon_url = esc_url_raw($_POST['upload-icon']);
+        
+        $methods = get_option('apm_payment_methods', array());
+        $methods[] = array('method' => $method, 'icon_url' => $icon_url);
+        update_option('apm_payment_methods', $methods);
+    }
+}
+add_action('admin_post_apm_add_method', 'apm_handle_form_submission');

@@ -1,8 +1,6 @@
-.wrap {
-  max-width: 800px;
-  margin: 20px auto;
+.apm-admin-page {
+  
 }
-
 .nav-tab-wrapper {
   margin-bottom: 20px;
 }
@@ -42,7 +40,6 @@
 
 #add-payment-method, #save-payment-methods {
   margin-top: 20px;
-  padding: 10px 20px;
   background: #0073aa;
   color: #fff;
   border: none;
