@@ -48,10 +48,13 @@ function apm_admin_page()
     </div>
     <div class="wrap apm-admin-page">
         <h1>Accepted Payment Methods</h1>
-        <h2 class="nav-tab-wrapper">
-            <a href="#tab-1" class="nav-tab nav-tab-active">Accepted Payment Methods</a>
-            <a href="#tab-2" class="nav-tab">Settings</a>
-        </h2>
+    
+            <ul class="nav-tab-wrapper">
+                <li><a href="#tab-1" class="nav-tab nav-tab-active">Accepted Payment Methods</a></li>
+                <li><a href="#tab-2" class="nav-tab">Settings</a></li>
+                <li><a href="#tab-3" class="nav-tab">Documentation</a></li>
+            </ul>
+ 
         <div id="tab-1" class="tab-content">
             <h4>Add the payment methods for you store. For the best results upload svg images</h4>
             <ul id="payment-methods-list">
@@ -111,6 +114,10 @@ function apm_admin_page()
                 <?php submit_button(); ?>
             </form>
         </div>
+        <div id="tab-3" class="tab-content" style="display:none;">
+            <h3>Documentation</h3>
+            <p>The basic guides on how to use this plugin</p>
+        </div>
     </div>
     <div class="dwk-footer-wrap wrap">
         <div class="row">
@@ -132,7 +139,7 @@ function apm_admin_page()
 
             <div class="copyright col-md-3">
                 <span>All rights reserved</span>
-                &copy; <?php echo date('Y');?>
+                &copy; <?php echo date('Y'); ?>
             </div>
         </div>
     </div>
