@@ -54,12 +54,24 @@ function apm_save_payment_methods() {
     if ( ! current_user_can( 'manage_options' ) ) {
         wp_send_json_error( 'Unauthorized user' );
     }
-    $methods = isset( $_POST['methods'] ) ? array_map( 'sanitize_text_field', $_POST['methods'] ) : array();
-    if (empty($methods)) {
-        $methods = array('paypal', 'mastercard', 'american-express', 'visa');
+    if (isset($_POST['methods'])) {
+      
+        $methods = array_map(function($method, $image) {
+            return [
+                'name' => sanitize_text_field($method),
+                'icon' => esc_url($image)
+            ];
+        }, array_keys($_POST['methods']), $_POST['methods']);
+        
+       
+        update_option('apm_payment_methods', $methods);
+        
+       
+        wp_send_json_success();
+    } else {
+        update_option('apm_payment_methods', '');
+       
     }
-    update_option( 'apm_payment_methods', $methods );
-    wp_send_json_success();
 }
 add_action( 'wp_ajax_save_payment_methods', 'apm_save_payment_methods' );
 
@@ -70,21 +82,13 @@ function handle_add_payment_method() {
 
     // Get data from the request
     $method = sanitize_text_field($_POST['method']);
-    $icon = esc_url_raw($_POST['icon']);
-
+    $icon = $_POST['icon'];
+    
     if (empty($method) || empty($icon)) {
         wp_send_json_error('Please enter payment method and upload an icon.');
         return;
     }
 
-    // Get the existing payment methods
-    $payment_methods = get_option('apm_payment_methods', array());
-
-    // Add the new payment method
-    $payment_methods[$method] = $icon;
-
-    // Update the option with the new payment methods
-    update_option('apm_payment_methods', $payment_methods);
 
     wp_send_json_success();
 }

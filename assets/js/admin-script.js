@@ -27,6 +27,7 @@ jQuery(document).ready(function($) {
         mediaUploader.on("select", function() {
             var attachment = mediaUploader.state().get("selection").first().toJSON();
             $("#upload-icon").val(attachment.url); // Set the icon URL as the value of the hidden input field
+            console.log(attachment);
         });
 
         mediaUploader.open();
@@ -83,14 +84,18 @@ jQuery(document).ready(function($) {
 
     // Handle saving payment methods
     $("#save-payment-methods").click(function() {
-        var methods = [];
+        var paymentMethods = {};
         $("#payment-methods-list .payment-method-item").each(function() {
-            methods.push($(this).data("method"));
+            var method = $(this).data("method");
+            var image = $(this).find('img').prop('src');
+            
+            paymentMethods[method] = image;
         });
-
+       
+       console.log(paymentMethods);
         $.post(apmData.ajax_url, {
             action: "save_payment_methods",
-            methods: methods
+            methods: paymentMethods
         }, function(response) {
             var message = $("#apm-save-message");
             if (response.success) {
