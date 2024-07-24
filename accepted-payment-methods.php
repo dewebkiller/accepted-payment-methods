@@ -11,7 +11,6 @@ Author URI: http://example.com/
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
-
 // Define plugin paths
 define( 'APM_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'APM_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

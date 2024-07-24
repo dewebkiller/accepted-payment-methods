@@ -2,12 +2,12 @@
 
 function apm_add_admin_menu() {
     add_menu_page( 
-        'Accepted Payment Methods', 
-        'Accepted Payment Methods', 
+        'Payment Icons', 
+        'Payment Icons', 
         'manage_options', 
         'accepted-payment-methods', 
         'apm_admin_page', 
-        'dashicons-admin-generic' 
+        'dashicons-money-alt' 
     );
 }
 add_action( 'admin_menu', 'apm_add_admin_menu' );
