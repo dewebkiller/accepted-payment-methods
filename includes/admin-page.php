@@ -1,5 +1,4 @@
 <?php
-
 function apm_add_admin_menu() {
     add_menu_page( 
         'Payment Icons', 
@@ -47,11 +46,11 @@ function apm_admin_page() {
             <form id="add-payment-method-form">
                 <label for="new-payment-method">New Payment Method:</label>
                 <input type="text" id="new-payment-method" name="new-payment-method" required>
-                <button id="upload-icon-button">Upload Icon</button>
+                <button id="upload-icon-button" class="button">Upload Icon</button>
                 <input type="hidden" id="upload-icon" name="upload-icon" required>
-                <button type="submit" id="add-payment-method-btn">Add Payment Method</button>
+                <button type="submit" id="add-payment-method-btn" class="button">Add Payment Method</button>
             </form>
-            <button id="save-payment-methods">Save</button>
+            <button id="save-payment-methods" class="button button-primary">Save Changes</button>
             <p id="apm-save-message" class="hidden"></p>
         </div>
         <div id="tab-2" class="tab-content" style="display:none;">
