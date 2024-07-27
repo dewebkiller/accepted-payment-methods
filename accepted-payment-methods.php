@@ -6,17 +6,20 @@ Description: Manage accepted payment methods with drag-and-drop sorting and cust
 Version: 1.0.0
 Author: Niresh Shrestha
 Author URI: http://example.com/
+Text Domain: dwk-apm
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
+
 // Define plugin paths
 define( 'APM_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'APM_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 // Include the admin page
 require_once APM_PLUGIN_DIR . 'includes/admin-page.php';
+require_once APM_PLUGIN_DIR . 'includes/frontend-page.php';
 
 // Enqueue admin scripts and styles
 function apm_enqueue_admin_assets() {

@@ -6,7 +6,7 @@
   --coloroffblack: #393738;
   --bordercolor: #c3c4c7;
   --offwhite: rgba(82,76,255,0.04);
-  --dwk-notice-box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  --dwk-notice-box-shadow: 0 1px 1px rgba(0,0,0,.04);
 }
 .dwk-header-wrap, .dwk-footer-wrap {
   background: #ffffff;
@@ -51,10 +51,9 @@
   display: flex;
   font-family: Roboto, Arial, Helvetica, sans-serif;
   background: var(--colorwhite);
-  border: 1px solid var(--bordercolor);
   border-inline-start-width: 4px;
   box-shadow: var(--dwk-notice-box-shadow);
-  margin: 5px 20px 5px 2px;
+  margin: 5px 20px 20px 5px;
 }
 .dwk-notice-inner {
   background: var(--offwhite);

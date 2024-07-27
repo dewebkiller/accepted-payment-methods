@@ -20,7 +20,7 @@ function apm_admin_page()
     if (!is_array($methods)) {
         $methods = $default_methods;
     }
-    $default_settings = array('alignment' => 'left', 'size' => 'medium', 'tooltip' => 'yes', 'icon_spacing' => 10);
+    $default_settings = array('alignment' => 'left', 'icon_size' => 50, 'tooltip' => 'yes', 'icon_spacing' => 10);
     $settings = get_option('apm_settings', $default_settings);
 
     $settings = wp_parse_args($settings, $default_settings);
@@ -84,20 +84,26 @@ function apm_admin_page()
                     <tr valign="top">
                         <th scope="row">Size</th>
                         <td>
-                            <select name="apm_settings[size]">
-                                <option value="small" <?php selected($settings['size'], 'small'); ?>>Small</option>
-                                <option value="medium" <?php selected($settings['size'], 'medium'); ?>>Medium</option>
-                                <option value="large" <?php selected($settings['size'], 'large'); ?>>Large</option>
-                            </select>
+                        <input type="number" class="small-text" name="apm_settings[icon_size]" id="apm_icon_size" value="<?php echo esc_attr($settings['icon_size']); ?>">
                         </td>
                         <td>
                             <p class="description">
                                 <?php
                                 echo wp_kses_post(
-                                    __('Predefined size of icons. <em>Note: You can overwrite via theme style.</em>', 'your-text-domain')
+                                    __('Size of Icons in px.', 'your-text-domain')
                                 );
                                 ?>
                             </p>
+                        </td>
+                    </tr>
+                    
+                    <tr valign="top">
+                        <th scope="row"><label for="apm_icon_spacing"><?php esc_html_e('Spacing', 'your-text-domain'); ?></label></th>
+                        <td>
+                            <input type="number" class="small-text" name="apm_settings[icon_spacing]" id="apm_icon_spacing" value="<?php echo esc_attr($settings['icon_spacing']); ?>">
+                        </td>
+                        <td>
+                            <p class="description"><?php esc_html_e('Gap between icons in px', 'your-text-domain'); ?></p>
                         </td>
                     </tr>
                     <tr valign="top">
@@ -108,22 +114,13 @@ function apm_admin_page()
                                 <option value="no" <?php selected($settings['tooltip'], 'no'); ?>>No</option>
                             </select>
                         </td>
-                        <td>Display the tooltip or not</td>
-                    </tr>
-                    <tr valign="top">
-                        <th scope="row"><label for="apm_icon_spacing"><?php esc_html_e('Spacing', 'your-text-domain'); ?></label></th>
-                        <td>
-                            <input type="number" class="small-text" name="apm_settings[icon_spacing]" id="apm_icon_spacing" value="<?php echo esc_attr($settings['icon_spacing']); ?>">
-                        </td>
-                        <td>
-                            <p class="description"><?php esc_html_e('Gap between icons in px', 'your-text-domain'); ?></p>
-                        </td>
+                        <td>Show the tooltip or not.</td>
                     </tr>
                 </table>
                 <?php submit_button(); ?>
             </form>
         </div>
-        <div id="tab-3" class="tab-content">
+        <div id="tab-3" class="tab-content" style="display:none;">
             <div class="dwk-notice dwk-notice-inner">
                 <div class="dwk-notice__content">
                     <h3>Documentation</h3>

@@ -2,7 +2,7 @@
   <div class="row">
     <div class="creator col-md-3">
       <span>Proudly Created by</span>
-      <a href="https://www.dewebkiller.com/"><img src="https://www.dewebkiller.com/dwk/images/logo.png" alt="dewebkiller" class="dwk-logo" width="150"></a>
+      <a href="https://www.dewebkiller.com/" target="_blank"><img src="https://www.dewebkiller.com/dwk/images/logo.png" alt="dewebkiller" class="dwk-logo" width="150"></a>
     </div>
 
     <div class="col-md-6">
