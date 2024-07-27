@@ -1,18 +1,21 @@
 :root {
   --colorwhite: #fff;
-  --colorbrand: #8066AC;
+  --colorbrand: #1d8bdd;
   --colorblack: #000;
+  --colorred: #dc3545;
   --coloroffblack: #393738;
+  --bordercolor: #c3c4c7;
+  --offwhite: rgba(82,76,255,0.04);
+  --dwk-notice-box-shadow: 0 1px 4px rgba(0,0,0,0.15);
 }
 .dwk-header-wrap, .dwk-footer-wrap {
   background: #ffffff;
   border-color: var(--colorbrand);
- 
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 4px;
   overflow: hidden;
-  padding: 20px 15px;
+  padding: 10px 15px;
   position: relative;
   -webkit-box-shadow: 8px 8px 8px 0 rgba(187, 187, 187, 0.2);
   -moz-box-shadow: 8px 8px 8px 0 rgba(187, 187, 187, 0.2);
@@ -42,6 +45,50 @@
   background: var(--colorbrand);
   text-decoration: none;
   transition: all 0.3s ease;
+}
+.dwk-notice {
+  position: relative;
+  display: flex;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  background: var(--colorwhite);
+  border: 1px solid var(--bordercolor);
+  border-inline-start-width: 4px;
+  box-shadow: var(--dwk-notice-box-shadow);
+  margin: 5px 20px 5px 2px;
+}
+.dwk-notice-inner {
+  background: var(--offwhite);
+  border: none;
+  width: 100%;
+  margin-top: 20px;
+}
+.dwk-notice::before {
+  display: block;
+    content: "";
+    position: absolute;
+    inset-inline-start: -4px;
+    inset-block-start: -1px;
+    inset-block-end: -1px;
+    width: 4px;
+    background-color: var(--colorbrand);
+}
+.dwk-notice__aside {
+  overflow: hidden;
+  background-color: var(--offwhite);
+  padding: 10px;
+  text-align: center;
+  padding-block-start: 15px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+.dwk-notice__content {
+  padding: 20px;
+}
+.dwk-notice__content h1, .dwk-notice__content h3, .dwk-notice__content p {
+  margin: 0;
+}
+.dwk-notice__content p {
+  margin-top: 8px;
 }
 .dwk-btn:hover {
   background: var(--coloroffblack);
@@ -98,8 +145,8 @@ border-bottom: 1px solid var(--colorwhite) !important;
   align-items: center;
   margin-bottom: 10px;
   padding: 10px;
-  border: 1px solid #ddd;
-  background-color: #fff;
+  border: 1px solid var(--bordercolor);
+  background-color: var(--colorwhite);
 }
 
 .payment-method-item img {
@@ -120,7 +167,20 @@ border-bottom: 1px solid var(--colorwhite) !important;
 .payment-method-item .remove-method:hover {
   background: #c82333;
 }
-
+.form-table tr {
+  border-bottom: 1px solid var(--bordercolor);
+}
+.form-table select {
+  min-width: 6rem;
+}
+.form-table input[type='number'] {
+  width: 6rem;
+}
+.form-table .description em {
+  display: block;
+  color: var(--colorred);
+  font-size: 10px;
+}
 #add-payment-method, #save-payment-methods {
   margin-top: 20px;
   background: #0073aa;
