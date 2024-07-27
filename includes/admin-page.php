@@ -90,7 +90,7 @@ function apm_admin_page()
                             <p class="description">
                                 <?php
                                 echo wp_kses_post(
-                                    __('Size of Icons in px.', 'your-text-domain')
+                                    __('Size of Icons in px.', 'dwk-apm')
                                 );
                                 ?>
                             </p>
@@ -98,12 +98,12 @@ function apm_admin_page()
                     </tr>
                     
                     <tr valign="top">
-                        <th scope="row"><label for="apm_icon_spacing"><?php esc_html_e('Spacing', 'your-text-domain'); ?></label></th>
+                        <th scope="row"><label for="apm_icon_spacing"><?php esc_html_e('Spacing', 'dwk-apm'); ?></label></th>
                         <td>
                             <input type="number" class="small-text" name="apm_settings[icon_spacing]" id="apm_icon_spacing" value="<?php echo esc_attr($settings['icon_spacing']); ?>">
                         </td>
                         <td>
-                            <p class="description"><?php esc_html_e('Gap between icons in px', 'your-text-domain'); ?></p>
+                            <p class="description"><?php esc_html_e('Gap between icons in px', 'dwk-apm'); ?></p>
                         </td>
                     </tr>
                     <tr valign="top">
