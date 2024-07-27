@@ -28,15 +28,15 @@ function apm_admin_page()
 ?>
     <div class="wrap apm-admin-page">
         <h2 class="nav-tab-wrapper">
-            <a href="#tab-1" class="nav-tab nav-tab-active">Accepted Payment Methods</a>
-            <a href="#tab-2" class="nav-tab">Settings</a>
-            <a href="#tab-3" class="nav-tab">Documentation</a>
+            <a href="#tab-1" class="nav-tab nav-tab-active"><?php esc_html_e('Accepted Payment Methods', 'dwk-apm'); ?></a>
+            <a href="#tab-2" class="nav-tab"><?php esc_html_e('Settings', 'dwk-apm'); ?></a>
+            <a href="#tab-3" class="nav-tab"><?php esc_html_e('Documentation', 'dwk-apm'); ?></a>
         </h2>
         <div id="tab-1" class="tab-content">
             <div class="dwk-notice dwk-notice-inner">
                 <div class="dwk-notice__content">
-                    <h3>Add payment methods</h3>
-                    <p>Add the payment method icons/images and drag and drop the blocks for ordering the payment methods.</p>
+                    <h3><?php esc_html_e('Add payment methods', 'dwk-apm'); ?></h3>
+                    <p><?php esc_html_e('Add the payment method icons/images and drag and drop the blocks for ordering the payment methods.', 'dwk-apm'); ?></p>
                 </div>
             </div>
             <ul id="payment-methods-list">
@@ -45,44 +45,44 @@ function apm_admin_page()
                         <li class="payment-method-item" data-method="<?php echo esc_attr($method['name']); ?>">
                             <img src="<?php echo esc_url($method['icon']); ?>" alt="<?php echo esc_attr(ucfirst($method['name'])); ?>">
                             <span><?php echo ucfirst(str_replace('-', ' ', $method['name'])); ?></span>
-                            <button class="remove-method">Remove</button>
+                            <button class="remove-method"><?php esc_html_e('Remove', 'dwk-apm'); ?></button>
                         </li>
                     <?php endif; ?>
                 <?php endforeach; ?>
             </ul>
             <form id="add-payment-method-form">
-                <label for="new-payment-method">New Payment Method:</label>
+                <label for="new-payment-method"><?php esc_html_e('New Payment Method:', 'dwk-apm'); ?></label>
                 <input type="text" id="new-payment-method" name="new-payment-method" required>
-                <button id="upload-icon-button" class="button">Upload Icon</button>
+                <button id="upload-icon-button" class="button"><?php esc_html_e('Upload Icon', 'dwk-apm'); ?></button>
                 <input type="hidden" id="upload-icon" name="upload-icon" required>
-                <button type="submit" id="add-payment-method-btn" class="button">Add Payment Method</button>
+                <button type="submit" id="add-payment-method-btn" class="button"><?php esc_html_e('Add Payment Method', 'dwk-apm'); ?></button>
             </form>
-            <button id="save-payment-methods" class="button button-primary">Save Changes</button>
+            <button id="save-payment-methods" class="button button-primary"><?php esc_html_e('Save Changes', 'dwk-apm'); ?></button>
             <p id="apm-save-message" class="hidden"></p>
         </div>
         <div id="tab-2" class="tab-content" style="display:none;">
             <div class="dwk-notice dwk-notice-inner">
                 <div class="dwk-notice__content">
-                    <h3>Settings</h3>
-                    <p>Experiment with the various settings available for the plugins to achieve optimal results.</p>
+                    <h3><?php esc_html_e('Settings', 'dwk-apm'); ?></h3>
+                    <p><?php esc_html_e('Experiment with the various settings available for the plugins to achieve optimal results.', 'dwk-apm'); ?></p>
                 </div>
             </div>
             <form method="post" action="options.php">
                 <?php settings_fields('apm_settings_group'); ?>
-                <table class="form-table">
+                <table class="form-table dwk-form-table">
                     <tr valign="top">
-                        <th scope="row">Alignment</th>
+                        <th scope="row"><?php esc_html_e('Gap Alignment', 'dwk-apm'); ?></th>
                         <td>
                             <select name="apm_settings[alignment]">
-                                <option value="left" <?php selected($settings['alignment'], 'left'); ?>>Left</option>
-                                <option value="center" <?php selected($settings['alignment'], 'center'); ?>>Center</option>
-                                <option value="right" <?php selected($settings['alignment'], 'right'); ?>>Right</option>
+                                <option value="left" <?php selected($settings['alignment'], 'left'); ?>><?php esc_html_e('Left', 'dwk-apm'); ?></option>
+                                <option value="center" <?php selected($settings['alignment'], 'center'); ?>><?php esc_html_e('Center', 'dwk-apm'); ?></option>
+                                <option value="right" <?php selected($settings['alignment'], 'right'); ?>><?php esc_html_e('Right', 'dwk-apm'); ?></option>
                             </select>
                         </td>
-                        <td>Aligmnent of icons</td>
+                        <td><?php esc_html_e('Aligmnent of icons', 'dwk-apm'); ?></td>
                     </tr>
                     <tr valign="top">
-                        <th scope="row">Size</th>
+                        <th scope="row"> <?php esc_html_e('Size', 'dwk-apm'); ?></th>
                         <td>
                         <input type="number" class="small-text" name="apm_settings[icon_size]" id="apm_icon_size" value="<?php echo esc_attr($settings['icon_size']); ?>">
                         </td>
@@ -103,18 +103,18 @@ function apm_admin_page()
                             <input type="number" class="small-text" name="apm_settings[icon_spacing]" id="apm_icon_spacing" value="<?php echo esc_attr($settings['icon_spacing']); ?>">
                         </td>
                         <td>
-                            <p class="description"><?php esc_html_e('Gap between icons in px', 'dwk-apm'); ?></p>
+                            <p class="description"><?php esc_html_e('Gap between icons in px.', 'dwk-apm'); ?></p>
                         </td>
                     </tr>
                     <tr valign="top">
-                        <th scope="row">Display Tooltip</th>
+                        <th scope="row"><?php esc_html_e('Display Tooltip.', 'dwk-apm'); ?></th>
                         <td>
                             <select name="apm_settings[tooltip]">
                                 <option value="yes" <?php selected($settings['tooltip'], 'yes'); ?>>Yes</option>
                                 <option value="no" <?php selected($settings['tooltip'], 'no'); ?>>No</option>
                             </select>
                         </td>
-                        <td>Show the tooltip or not.</td>
+                        <td><?php esc_html_e('Show the tooltip or not.', 'dwk-apm'); ?></td>
                     </tr>
                 </table>
                 <?php submit_button(); ?>
@@ -123,18 +123,18 @@ function apm_admin_page()
         <div id="tab-3" class="tab-content" style="display:none;">
             <div class="dwk-notice dwk-notice-inner">
                 <div class="dwk-notice__content">
-                    <h3>Documentation</h3>
-                    <p>The basic guide on how to implement this plugin in your theme.</p>
+                    <h3><?php esc_html_e('Documentation', 'dwk-apm'); ?></h3>
+                    <p><?php esc_html_e('The basic guide on how to implement this plugin in your theme.', 'dwk-apm'); ?></p>
                 </div>
             </div>
             <ol>
                 <li>
-                    <p><strong>Plugin shortcode: (Use this on a post or page)</strong></p>
-                    <p>Use the shortcode [dwk_apm_methods] to display them on your site</p>
+                    <p><strong><?php esc_html_e('Plugin shortcode: (Use this on a post or page)', 'dwk-apm'); ?></strong></p>
+                    <p><?php esc_html_e('Use the shortcode [dwk_apm_methods] to display them on your site', 'dwk-apm'); ?></p>
                 </li>
                 <li>
-                    <p><strong>Template Tag: (Use this in a template php file)</strong></p>
-                    <pre>&lt;?php echo do_shortcode('[dwk_apm_methods]');?&gt;</pre>
+                    <p><strong><?php esc_html_e('Template Tag: (Use this in a template php file', 'dwk-apm'); ?></strong></p>
+                    <pre><?php esc_html_e('<?php echo do_shortcode("[dwk_apm_methods]")?>', 'dwk-apm'); ?></pre>
                 </li>
             </ol>
 

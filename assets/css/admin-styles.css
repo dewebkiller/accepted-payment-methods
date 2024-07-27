@@ -166,16 +166,16 @@ border-bottom: 1px solid var(--colorwhite) !important;
 .payment-method-item .remove-method:hover {
   background: #c82333;
 }
-.form-table tr {
+.dwk-form-table tr {
   border-bottom: 1px solid var(--bordercolor);
 }
-.form-table select {
+.dwk-form-table select {
   min-width: 6rem;
 }
-.form-table input[type='number'] {
+.dwk-form-table input[type='number'] {
   width: 6rem;
 }
-.form-table .description em {
+.dwk-form-table .description em {
   display: block;
   color: var(--colorred);
   font-size: 10px;
