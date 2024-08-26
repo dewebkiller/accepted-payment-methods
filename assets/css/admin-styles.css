@@ -138,7 +138,17 @@ border-bottom: 1px solid var(--colorwhite) !important;
   list-style: none;
   padding: 0;
 }
+.dwk-payment-methods {
+  width: 100%;
+}
 
+.dwk-payment-methods ul {
+  align-items: center;
+}
+
+.dwk-payment-methods li {
+  width: auto;
+}
 .payment-method-item {
   display: flex;
   align-items: center;

@@ -1,21 +1,9 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+  exit; // Exit if accessed directly
+}
 function dwk_apm_methods_shortcode()
 { ?>
-  <style>
-    .dwk-payment-methods {
-      width: 100%;
-    }
-
-    .dwk-payment-methods ul {
-      align-items: center;
-    }
-
-    li {
-      width: auto;
-    }
-
-    .dwk-payment-methods ul li img {}
-  </style>
   <?php
   $default_methods = [];
   $methods = get_option('apm_payment_methods', $default_methods);

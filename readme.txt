@@ -14,7 +14,7 @@ Requires PHP: 8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-The Accepted Payment Methods plugin is a straightforward, lightweight solution crafted to enhance your website by displaying visually appealing icons of the payment methods you accept. This plugin is ideal for a variety of websites, including e-commerce platforms, service-oriented websites, and informational blogs. By integrating this plugin, you can effectively communicate to your customers the payment options available, thereby enhancing their user experience and building trust. The easy-to-use interface allows you to customize the appearance of the icons to match your website’s design, ensuring a cohesive and professional look. Whether you are aiming to boost your online sales or simply provide clear payment information, the Accepted Payment Methods plugin is an essential tool for achieving these goals.
+The Accepted Payment Methods plugin is a straightforward, lightweight solution designed to display visually appealing icons on your website.
 
 == Description ==
 

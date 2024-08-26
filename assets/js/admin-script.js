@@ -92,10 +92,11 @@ jQuery(document).ready(function($) {
             paymentMethods[method] = image;
         });
        
-       console.log(paymentMethods);
+      // console.log(paymentMethods);
         $.post(apmData.ajax_url, {
             action: "save_payment_methods",
-            methods: paymentMethods
+            methods: paymentMethods,
+            nonce: apmData.nonce
         }, function(response) {
             var message = $("#apm-save-message");
             if (response.success) {
