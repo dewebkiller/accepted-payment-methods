@@ -1,7 +1,4 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-  exit; // Exit if accessed directly
-}
 function dwk_apm_methods_shortcode()
 { ?>
   <?php
