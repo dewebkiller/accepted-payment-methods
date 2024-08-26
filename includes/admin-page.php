@@ -1,30 +1,30 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
+if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
-function apm_add_admin_menu()
+function dwk_apm_add_admin_menu()
 {
     add_menu_page(
         'Payment Icons',
         'Payment Icons',
         'manage_options',
         'accepted-payment-methods',
-        'apm_admin_page',
+        'dwk_apm_admin_page',
         'dashicons-money-alt'
     );
 }
-add_action('admin_menu', 'apm_add_admin_menu');
+add_action('admin_menu', 'dwk_apm_add_admin_menu');
 
-function apm_admin_page()
+function dwk_apm_admin_page()
 {
     $default_methods = [];
-    $methods = get_option('apm_payment_methods', $default_methods);
+    $methods = get_option('dwk_apm_payment_methods', $default_methods);
 
     if (!is_array($methods)) {
         $methods = $default_methods;
     }
     $default_settings = array('alignment' => 'left', 'icon_size' => 50, 'tooltip' => 'yes', 'icon_spacing' => 10);
-    $settings = get_option('apm_settings', $default_settings);
+    $settings = get_option('dwk_apm_settings', $default_settings);
 
     $settings = wp_parse_args($settings, $default_settings);
     include(plugin_dir_path(__FILE__) . 'plugin-header.php');
@@ -47,7 +47,7 @@ function apm_admin_page()
                     <?php if (is_array($method) && isset($method['name'], $method['icon'])) : ?>
                         <li class="payment-method-item" data-method="<?php echo esc_attr($method['name']); ?>">
                             <img src="<?php echo esc_url($method['icon']); ?>" alt="<?php echo esc_attr(ucfirst($method['name'])); ?>">
-                            <span><?php echo ucfirst(str_replace('-', ' ', $method['name'])); ?></span>
+                            <span><?php echo esc_html(ucfirst(str_replace('-', ' ', $method['name']))); ?></span>
                             <button class="remove-method"><?php esc_html_e('Remove', 'accepted-payment-methods'); ?></button>
                         </li>
                     <?php endif; ?>
@@ -71,12 +71,12 @@ function apm_admin_page()
                 </div>
             </div>
             <form method="post" action="options.php">
-                <?php settings_fields('apm_settings_group'); ?>
+                <?php settings_fields('dwk_apm_settings_group'); ?>
                 <table class="form-table dwk-form-table">
                     <tr valign="top">
                         <th scope="row"><?php esc_html_e('Gap Alignment', 'accepted-payment-methods'); ?></th>
                         <td>
-                            <select name="apm_settings[alignment]">
+                            <select name="dwk_apm_settings[alignment]">
                                 <option value="left" <?php selected($settings['alignment'], 'left'); ?>><?php esc_html_e('Left', 'accepted-payment-methods'); ?></option>
                                 <option value="center" <?php selected($settings['alignment'], 'center'); ?>><?php esc_html_e('Center', 'accepted-payment-methods'); ?></option>
                                 <option value="right" <?php selected($settings['alignment'], 'right'); ?>><?php esc_html_e('Right', 'accepted-payment-methods'); ?></option>
@@ -87,7 +87,7 @@ function apm_admin_page()
                     <tr valign="top">
                         <th scope="row"> <?php esc_html_e('Size', 'accepted-payment-methods'); ?></th>
                         <td>
-                        <input type="number" class="small-text" name="apm_settings[icon_size]" id="apm_icon_size" value="<?php echo esc_attr($settings['icon_size']); ?>">
+                            <input type="number" class="small-text" name="dwk_apm_settings[icon_size]" id="apm_icon_size" value="<?php echo esc_attr($settings['icon_size']); ?>">
                         </td>
                         <td>
                             <p class="description">
@@ -99,11 +99,11 @@ function apm_admin_page()
                             </p>
                         </td>
                     </tr>
-                    
+
                     <tr valign="top">
-                        <th scope="row"><label for="apm_icon_spacing"><?php esc_html_e('Spacing', 'accepted-payment-methods'); ?></label></th>
+                        <th scope="row"><label for="dwk_apm_icon_spacing"><?php esc_html_e('Spacing', 'accepted-payment-methods'); ?></label></th>
                         <td>
-                            <input type="number" class="small-text" name="apm_settings[icon_spacing]" id="apm_icon_spacing" value="<?php echo esc_attr($settings['icon_spacing']); ?>">
+                            <input type="number" class="small-text" name="dwk_apm_settings[icon_spacing]" id="dwk_apm_icon_spacing" value="<?php echo esc_attr($settings['icon_spacing']); ?>">
                         </td>
                         <td>
                             <p class="description"><?php esc_html_e('Gap between icons in px.', 'accepted-payment-methods'); ?></p>
@@ -112,7 +112,7 @@ function apm_admin_page()
                     <tr valign="top">
                         <th scope="row"><?php esc_html_e('Display Tooltip.', 'accepted-payment-methods'); ?></th>
                         <td>
-                            <select name="apm_settings[tooltip]">
+                            <select name="dwk_apm_settings[tooltip]">
                                 <option value="yes" <?php selected($settings['tooltip'], 'yes'); ?>>Yes</option>
                                 <option value="no" <?php selected($settings['tooltip'], 'no'); ?>>No</option>
                             </select>
