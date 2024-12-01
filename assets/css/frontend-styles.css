@@ -13,14 +13,20 @@
   display: inline-block;
   cursor: pointer;
 }
-
+.dwk-tooltip:hover .dwk-tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
 .dwk-tooltip .dwk-tooltiptext {
-  visibility: hidden;
-  width: 100%;
-  padding: 3px 20px;
-  font-size: 12px;
-  background-color: var(--coloroffblack);
+  bottom: 110%; /* Position above the item */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Adjust to center */
+  background: var(--coloroffblack);
   color: var(--colorwhite);
+  visibility: hidden;
+  width: max-content;
+  padding: 3px 5px;
+  font-size: 12px;
   text-align: center;
   border-radius: 5px;
   position: absolute;
@@ -28,23 +34,13 @@
   opacity: 0;
   transition: opacity 0.3s;
 }
-.dwk-tooltip:hover .dwk-tooltiptext {
-  visibility: visible;
-  opacity: 1;
-}
-.dwk-tooltip .dwk-tooltiptext {
-  bottom: 110%;
-  left:-20px;
-  background: var(--coloroffblack);
-  color: var(--colorwhite);
-}
 
 .dwk-tooltip .dwk-tooltiptext::after {
   content: "";
   position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
+  top: 100%; /* Position below the tooltip */
+  left: 50%; /* Center arrow */
+  transform: translateX(-50%); /* Adjust arrow to center */
   border-width: 5px;
   border-style: solid;
   border-color: var(--coloroffblack) transparent transparent transparent;
