@@ -14,7 +14,7 @@ Requires PHP: 8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-The Accepted Payment Methods plugin is a straightforward, lightweight solution for displaying visually appealing icons on your website. You can use the pre-built icons or upload manually. 
+Display and customize accepted payment method icons on your website. Features pre-built icons, manual uploads, and drag-and-drop sorting.
 
 == Description ==
 
@@ -75,11 +75,12 @@ Yes you can. There is a tooltip option to display the title with some cool css.
 The plugin is developed to work with all the major themes and tested, but we cannot guarantee due to the diversity and different working methods of the developers.
 
 == Screenshots ==
-1. Main plugin dashboard.
-2. Settings page.
-3. Documentation page.
-4. Adding shortcode.
-5. Frontend Display.
+1. Prebuilt Icons dashboard.
+2. Manual Icons Upload.
+3. Settings page
+4. Documentation page.
+5. Adding shortcode. 
+6. Frontend Display.
 
 == Changelog ==
 
