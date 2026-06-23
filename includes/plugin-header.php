@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
   <div class="row">
     <div class="logo-wrap col-md-6">
       <div class="title">
-        <a href="https://www.dewebkiller.com/" target="_blank"><img src="<?php echo esc_url(DWKAPM_PLUGIN_URL); ?>assets/icons/logo.png" alt="dewebkiller" class="dwk-logo" width="200"></a>
+        <a href="https://www.dewebkiller.com/" target="_blank"><img src="<?php echo esc_url(DWKAPM_PLUGIN_URL); ?>assets/images/logo.png" alt="dewebkiller" class="dwk-logo" width="200"></a>
         
       </div>
     </div>

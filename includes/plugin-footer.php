@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
   <div class="row">
     <div class="creator col-md-3">
       <span><?php esc_html_e('Proudly Created by', 'accepted-payment-methods'); ?></span>
-      <a href="https://www.dewebkiller.com/" target="_blank"><img src="<?php echo esc_url(DWKAPM_PLUGIN_URL); ?>assets/icons/logo.png" alt="dewebkiller" class="dwk-logo" width="150"></a>
+      <a href="https://www.dewebkiller.com/" target="_blank"><img src="<?php echo esc_url(DWKAPM_PLUGIN_URL); ?>assets/images/logo.png" alt="dewebkiller" class="dwk-logo" width="150"></a>
     </div>
 
     <div class="col-md-6">

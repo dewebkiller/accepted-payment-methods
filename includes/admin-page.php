@@ -26,6 +26,7 @@ if (!function_exists('dwk_apm_admin_page')) {
         if (!is_array($methods)) {
             $methods = $default_methods;
         }
+        $source = get_option('dwk_apm_method_source', 'manual');
         $default_settings = array('alignment' => 'left', 'icon_size' => 50, 'tooltip' => 'yes', 'icon_spacing' => 10);
         $settings = get_option('dwk_apm_settings', $default_settings);
 
@@ -42,27 +43,71 @@ if (!function_exists('dwk_apm_admin_page')) {
                 <div class="dwk-notice dwk-notice-inner">
                     <div class="dwk-notice__content">
                         <h3><?php esc_html_e('Add payment methods', 'accepted-payment-methods'); ?></h3>
-                        <p><?php esc_html_e('Add the payment method icons/images and drag and drop the blocks for ordering the payment methods.', 'accepted-payment-methods'); ?></p>
+                        <p><?php esc_html_e('Choose how you want to manage your accepted payment methods: upload manually or select from the pre-built library.', 'accepted-payment-methods'); ?></p>
                     </div>
                 </div>
-                <ul id="payment-methods-list">
-                    <?php foreach ($methods as $method) : ?>
-                        <?php if (is_array($method) && isset($method['name'], $method['icon'])) : ?>
-                            <li class="payment-method-item" data-method="<?php echo esc_attr($method['name']); ?>">
-                                <img src="<?php echo esc_url($method['icon']); ?>" alt="<?php echo esc_attr(ucfirst($method['name'])); ?>">
-                                <span><?php echo esc_html(ucfirst(str_replace('-', ' ', $method['name']))); ?></span>
-                                <button class="remove-method"><?php esc_html_e('Remove', 'accepted-payment-methods'); ?></button>
-                            </li>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </ul>
-                <form id="add-payment-method-form">
-                    <label for="new-payment-method"><?php esc_html_e('New Payment Method:', 'accepted-payment-methods'); ?></label>
-                    <input type="text" id="new-payment-method" name="new-payment-method" required>
-                    <button id="upload-icon-button" class="button"><?php esc_html_e('Upload Icon', 'accepted-payment-methods'); ?></button>
-                    <input type="hidden" id="upload-icon" name="upload-icon" required>
-                    <button type="submit" id="add-payment-method-btn" class="button"><?php esc_html_e('Add Payment Method', 'accepted-payment-methods'); ?></button>
-                </form>
+
+                <div class="method-source-selector" style="margin-bottom: 25px; padding: 15px; background: #fafafa; border: 1px solid #e5e5e5; border-radius: 4px; display: flex; gap: 20px; align-items: center;">
+                    <span style="font-weight: 600; color: #3c434a;"><?php esc_html_e('Selection Method:', 'accepted-payment-methods'); ?></span>
+                    <label style="font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                        <input type="radio" name="dwk_apm_source" value="manual" <?php checked($source, 'manual'); ?>>
+                        <?php esc_html_e('Manual Upload', 'accepted-payment-methods'); ?>
+                    </label>
+                    <label style="font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                        <input type="radio" name="dwk_apm_source" value="library" <?php checked($source, 'library'); ?>>
+                        <?php esc_html_e('Pre-built Library', 'accepted-payment-methods'); ?>
+                    </label>
+                </div>
+
+                <!-- Manual Upload Layout Container -->
+                <div id="manual-upload-container" style="display: <?php echo $source === 'manual' ? 'block' : 'none'; ?>;">
+                    <ul id="payment-methods-list">
+                        <?php foreach ($methods as $method) : ?>
+                            <?php if (is_array($method) && isset($method['name'], $method['icon'])) : ?>
+                                <li class="payment-method-item" data-method="<?php echo esc_attr($method['name']); ?>">
+                                    <img src="<?php echo esc_url($method['icon']); ?>" alt="<?php echo esc_attr(ucfirst($method['name'])); ?>">
+                                    <span><?php echo esc_html(ucfirst(str_replace('-', ' ', $method['name']))); ?></span>
+                                    <button class="remove-method"><?php esc_html_e('Remove', 'accepted-payment-methods'); ?></button>
+                                </li>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </ul>
+                    <div id="upload-icon-preview" style="display: none; align-items: center; gap: 5px; margin-bottom: 10px;">
+                        <img src="" alt="Preview" style="max-height: 40px; width: auto; border: 1px solid #ccc; padding: 2px; background: #fff;">
+                        <span id="remove-preview-icon" class="dashicons dashicons-no-alt" style="color: #dc3545; cursor: pointer;" title="<?php echo esc_attr__('Remove', 'accepted-payment-methods'); ?>"></span>
+                    </div>
+                    <form id="add-payment-method-form" style="margin-bottom: 20px;">
+                        <label for="new-payment-method"><?php esc_html_e('New Payment Method:', 'accepted-payment-methods'); ?></label>
+                        <input type="text" id="new-payment-method" name="new-payment-method" placeholder="<?php esc_attr_e('Enter name or upload icon', 'accepted-payment-methods'); ?>" required>
+                        <button type="button" id="upload-icon-button" class="button"><?php esc_html_e('Upload Icon', 'accepted-payment-methods'); ?></button>
+                        <button type="submit" id="add-payment-method-btn" class="button"><?php esc_html_e('Add Payment Method', 'accepted-payment-methods'); ?></button>
+                    </form>
+                </div>
+
+                <!-- Pre-built Library Layout Container -->
+                <div id="prebuilt-library-container" style="display: <?php echo $source === 'library' ? 'block' : 'none'; ?>; margin-bottom: 25px;">
+                    <p style="font-style: italic; margin-bottom: 15px; color: #646970;"><?php esc_html_e('Select the payment methods you want to display on your website:', 'accepted-payment-methods'); ?></p>
+                    <div class="prebuilt-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px;">
+                        <?php
+                        $library_options = function_exists('dwk_apm_get_prebuilt_payment_methods') ? dwk_apm_get_prebuilt_payment_methods() : [];
+                        $checked_library = get_option('dwk_apm_checked_library_methods', []);
+                        if (!is_array($checked_library)) {
+                            $checked_library = [];
+                        }
+                        foreach ($library_options as $key => $data) :
+                            $is_checked = in_array($key, $checked_library);
+                            $label = $data['label'];
+                            $file = $data['file'];
+                        ?>
+                            <label class="prebuilt-item" style="display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid #e5e5e5; padding: 15px; background: #fff; cursor: pointer; border-radius: 4px; position: relative; transition: all 0.2s ease-in-out; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                                <input type="checkbox" class="prebuilt-checkbox" value="<?php echo esc_attr($key); ?>" <?php checked($is_checked); ?> style="position: absolute; top: 10px; right: 10px; margin: 0;">
+                                <img src="<?php echo esc_url(DWKAPM_PLUGIN_URL . 'assets/icons/' . $file); ?>" alt="<?php echo esc_attr($label); ?>" style="max-height: 35px; margin-bottom: 10px; width: auto; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.05));">
+                                <span style="font-weight: 500; font-size: 13px; color: #2c3338;"><?php echo esc_html($label); ?></span>
+                            </label>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+
                 <button id="save-payment-methods" class="button button-primary"><?php esc_html_e('Save Changes', 'accepted-payment-methods'); ?></button>
                 <p id="apm-save-message" class="hidden"></p>
             </div>

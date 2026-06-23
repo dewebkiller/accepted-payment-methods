@@ -5,11 +5,29 @@ if (! defined('ABSPATH')) {
 if (!function_exists('dwk_apm_methods_shortcode')) {
   function dwk_apm_methods_shortcode()
   {
-    $default_methods = [];
-    $methods = get_option('dwk_apm_payment_methods', $default_methods);
+    $source = get_option('dwk_apm_method_source', 'manual');
 
-    if (!is_array($methods)) {
-      $methods = $default_methods;
+    if ($source === 'library') {
+      $checked_methods = get_option('dwk_apm_checked_library_methods', []);
+      $prebuilt = function_exists('dwk_apm_get_prebuilt_payment_methods') ? dwk_apm_get_prebuilt_payment_methods() : [];
+      $methods = [];
+      if (is_array($checked_methods)) {
+        foreach ($checked_methods as $name) {
+          if (isset($prebuilt[$name])) {
+            $methods[] = [
+              'name' => $name,
+              'icon' => DWKAPM_PLUGIN_URL . 'assets/icons/' . $prebuilt[$name]['file']
+            ];
+          }
+        }
+      }
+    } else {
+      $default_methods = [];
+      $methods = get_option('dwk_apm_payment_methods', $default_methods);
+
+      if (!is_array($methods)) {
+        $methods = $default_methods;
+      }
     }
 
     $default_settings = array('alignment' => 'left', 'icon_size' => 50, 'tooltip' => 'yes', 'icon_spacing' => 10);
